@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">AlkeWallet</string>
+    <string name="logue">Loguea y empieza a transferir!</string>
+    <string name="email">Email</string>
+    <string name="addemail">Ingresa tu email</string>
+    <string name="pass">Contraseña</string>
+    <string name="addpass">Ingresa tu contraseña</string>
+    <string name="forgpass">Olvidaste tu contraseña?</string>
+    <string name="login">Login</string>
+    <string name="createacount">Crear una nueva cuenta</string>
+    <string name="registertittle">Registrarse y \nempieza a transferir</string>
+    <string name="backtologin">Ya tienes cuenta?</string>
+    <string name="name">Nombre</string>
+    <string name="addname">Ingresar tu nombre</string>
+    <string name="lastname">Apellido</string>
+    <string name="addlastname">Ingresar tu apellido</string>
+    <string name="pass2">Reingresar tu contraseña</string>
+    <string name="addaccount">Crear cuenta</string>
+    <string name="sendmoney">Enviar Dinero</string>
+    <string name="addmoney">Ingresar Dinero</string>
+    <string name="inicio">Inicio</string>
+    <string name="hellouser">Hola, Amanda</string>
+    <string name="balance">Balance Total</string>
+    <string name="realbalance">$124.57</string>
+    <string name="lasttransact">Ultimas transacciones</string>
+    <string name="notransact">No hay transacciones registradas!</string>
+    <string name="myperfil">Mi perfil</string>
+    <string name="profilename">Amanda Alkemy</string>
+    <string name="myinfo">Mi informacion</string>
+    <string name="mycard">Mis tarjetas</string>
+    <string name="option">Opciones</string>
+    <string name="helpcenter">Centro de ayuda</string>
+
+
+</resources>
