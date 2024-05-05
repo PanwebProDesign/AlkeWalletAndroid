@@ -1,7 +1,10 @@
 package com.protectly.alkewallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,7 +35,32 @@ class HomePageActivity : AppCompatActivity() {
         //validamos de que pagina viene
         validatePageRegister(receivedRegister)
 
+        val btnSendMoney = findViewById<Button>(R.id.send1)
+        val btnAddMoney = findViewById<Button>(R.id.add1)
+        val btnGoToProfile = findViewById<ImageView>(R.id.goto_profile)
 
+        btnSendMoney.setOnClickListener { goToSendMoney() }
+        btnAddMoney.setOnClickListener { goToAddMoney() }
+        btnGoToProfile.setOnClickListener { goToProfile()}
+
+
+
+
+    }
+
+    private fun goToProfile() {
+        val i = Intent(this, ProfileActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun goToAddMoney() {
+        val i = Intent(this, RequestMoneyActivity::class.java)
+        startActivity(i)
+    }
+
+    private fun goToSendMoney() {
+        val i = Intent(this, SendMoneyActivity::class.java)
+        startActivity(i)
     }
 
     private fun validatePageRegister(page : String) {
