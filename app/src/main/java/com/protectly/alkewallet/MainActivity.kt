@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     //Definimos el tag para la consola
-    val TAG = "MainActivity"
+    val TAG = "MainActivityy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

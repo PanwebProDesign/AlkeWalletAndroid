@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class HomePageActivity : AppCompatActivity() {
 
+    val TAG = "HomePageActivity"
+
     lateinit var linearLayoutEmpty : LinearLayout
     lateinit var linearLayoutTransactions : LinearLayout
 
@@ -42,10 +44,6 @@ class HomePageActivity : AppCompatActivity() {
         btnSendMoney.setOnClickListener { goToSendMoney() }
         btnAddMoney.setOnClickListener { goToAddMoney() }
         btnGoToProfile.setOnClickListener { goToProfile()}
-
-
-
-
     }
 
     private fun goToProfile() {

@@ -37,6 +37,7 @@
         android:id="@+id/goToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginBottom="40dp"
         android:text="Ya tiene cuenta?"
         android:fontFamily="@font/jua"

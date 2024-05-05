@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 class SignUpActivity : AppCompatActivity() {
 
     //Definimos el tag para la consola
-    val TAG = "SignUpActivity"
+    val TAG = "SignUpActivityy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class RequestMoneyActivity : AppCompatActivity() {
 
+    val TAG ="RequestMoneyActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
