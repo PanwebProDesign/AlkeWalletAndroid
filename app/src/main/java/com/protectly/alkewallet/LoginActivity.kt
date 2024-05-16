@@ -4,35 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.PatternsCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.protectly.alkewallet.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
 
     val TAG = "LoginActivity"
 
+    //declaramos viewbinding
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        //declaramos boton LOGIN y crear cuenta
-        val btnLogin = findViewById<Button>(R.id.btngotologin_l)
-        val btnGoToRegister = findViewById<TextView>(R.id.go_to_create_account)
-
+        //iniciamos viewbinding
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //declaramos las variables para email y su visor de error
         val email = findViewById<TextInputEditText>(R.id.textFieldEmail)
@@ -41,23 +32,12 @@ class LoginActivity : AppCompatActivity() {
         val pass = findViewById<TextInputEditText>(R.id.textFieldPass)
         val errorPassTF = findViewById<TextInputLayout>(R.id.textFieldPassError)
 
-        //Text wacher para hacer el cambio inmediato
-//        email.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(p0: CharSequence?, start: Int, before: Int, count: Int) {}
-//            override fun afterTextChanged(s: Editable?) {
-//                validateEmail(email, email2)
-//            }
-//        })
-
-
-
-
         //btn ir registro
-        btnGoToRegister.setOnClickListener { goToRegisterAcc() }
+        binding.btngotocreateacc.setOnClickListener { goToRegisterAcc() }
+
 
         //btn loguearse
-        btnLogin.setOnClickListener{
+        binding.btnLoginL.setOnClickListener {
             if (validateEmail(email, errorEmailTF)&& validatePass(pass, errorPassTF)){
                 goToHomePage()
             }else {

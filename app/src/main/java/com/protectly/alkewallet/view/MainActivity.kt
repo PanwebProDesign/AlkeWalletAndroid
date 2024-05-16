@@ -1,15 +1,15 @@
-package com.protectly.alkewallet
+package com.protectly.alkewallet.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-
+import com.protectly.alkewallet.LoginActivity
+import com.protectly.alkewallet.R
+import com.protectly.alkewallet.SignUpActivity
+import com.protectly.alkewallet.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,19 +17,18 @@ class MainActivity : AppCompatActivity() {
     //Definimos el tag para la consola
     val TAG = "MainActivityy"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    //declaramos viewBinding
+    private lateinit var binding: ActivityMainBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         //antes del oncreate se pone el spash
         val screenSplash = installSplashScreen()
-
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        //iniciamos viewBinding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         //****Primero tiene que quedar el splash screen
         //true muestra siempre y lo pega false carga y se va!
         screenSplash.setKeepOnScreenCondition { false }
