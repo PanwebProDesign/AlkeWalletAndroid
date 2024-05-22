@@ -6,9 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.protectly.alkewallet.LoginActivity
 import com.protectly.alkewallet.R
-import com.protectly.alkewallet.SignUpActivity
 import com.protectly.alkewallet.databinding.ActivityMainBinding
 
 
@@ -51,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     //Creamos la funcion de ir al registro
     private fun goToRegister() {
-        val i = Intent(this, SignUpActivity::class.java)
+        val i = Intent(this, RegisterActivity::class.java)
         startActivity(i)
     }
 

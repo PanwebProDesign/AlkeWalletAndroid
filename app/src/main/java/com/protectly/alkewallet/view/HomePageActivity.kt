@@ -1,33 +1,31 @@
-package com.protectly.alkewallet
+package com.protectly.alkewallet.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.protectly.alkewallet.R
+import com.protectly.alkewallet.databinding.ActivityHomePageBinding
 
 class HomePageActivity : AppCompatActivity() {
 
     val TAG = "HomePageActivity"
+
+
+    //instancioamos viewBinding
+    private lateinit var binding: ActivityHomePageBinding
 
     lateinit var linearLayoutEmpty : LinearLayout
     lateinit var linearLayoutTransactions : LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_home_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        //iniciamos viewbinding
+        binding = ActivityHomePageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         //id para linear layout
         linearLayoutEmpty = findViewById(R.id.emptylayout_hp)
         linearLayoutTransactions = findViewById(R.id.transactionlayout_hp)
@@ -37,13 +35,9 @@ class HomePageActivity : AppCompatActivity() {
         //validamos de que pagina viene
         validatePageRegister(receivedRegister)
 
-        val btnSendMoney = findViewById<Button>(R.id.send1)
-        val btnAddMoney = findViewById<Button>(R.id.add1)
-        val btnGoToProfile = findViewById<ImageView>(R.id.goto_profile)
-
-        btnSendMoney.setOnClickListener { goToSendMoney() }
-        btnAddMoney.setOnClickListener { goToAddMoney() }
-        btnGoToProfile.setOnClickListener { goToProfile()}
+        binding.send1.setOnClickListener { goToSendMoney() }
+        binding.add1.setOnClickListener { goToAddMoney() }
+        binding.gotoProfile.setOnClickListener { goToProfile()}
     }
 
     private fun goToProfile() {
