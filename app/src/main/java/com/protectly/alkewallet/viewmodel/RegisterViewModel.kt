@@ -3,7 +3,7 @@ package com.protectly.alkewallet.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.protectly.alkewallet.model.RegisterRequest
-import com.protectly.alkewallet.network.ApiClient
+import com.protectly.alkewallet.model.network.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

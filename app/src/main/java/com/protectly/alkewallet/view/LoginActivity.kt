@@ -12,6 +12,8 @@ import com.protectly.alkewallet.viewmodel.LoginViewModel
 import com.protectly.alkewallet.viewmodel.LoginViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.protectly.alkewallet.GlobalClassApp
+import com.protectly.alkewallet.GlobalClassApp.Companion.tokenAccess
 
 class LoginActivity : AppCompatActivity() {
 
@@ -35,13 +37,36 @@ class LoginActivity : AppCompatActivity() {
         binding.btngotocreateacc.setOnClickListener { goToRegisterAcc() }
         binding.btnLoginL.setOnClickListener { login() }
 
+        //observamos el LiveData del ViewModel para saber si el login fue exitoso
         viewModel.loginResultLiveData.observe(this) { loginOk ->
             if (loginOk) {
-                goToHomePage()
+                // Guardamos datos en APP GLOBAL
+                GlobalClassApp.tokenAccess = viewModel.accessTokenVm
+
+                // Obtenemos y guardamos los datos del usuario
+                viewModel.getUserData()
+
+                //goToHomePage()
             } else {
                 Toast.makeText(this, "Error en el login", Toast.LENGTH_SHORT).show()
             }
         }
+
+        viewModel.userDataLiveData.observe(this) { userResponse ->
+            if (userResponse != null) {
+                // Procesar los datos del usuario
+                Log.d("UserData", "Usuario: ${userResponse.first_name} Apellido: ${userResponse.last_name}")
+
+                goToHomePage()
+
+            } else {
+                Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+
     }
 
     private fun login() {

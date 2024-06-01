@@ -56,6 +56,11 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 
+    implementation ("com.squareup.picasso:picasso:2.8")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

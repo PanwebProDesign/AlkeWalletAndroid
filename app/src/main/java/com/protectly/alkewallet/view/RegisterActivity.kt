@@ -31,7 +31,8 @@ class RegisterActivity : AppCompatActivity() {
         // Observamos el resultado del registro
         viewModel.registerResultLiveData.observe(this) { registerOk ->
             if (registerOk) {
-                goToHomePage()
+                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                goToRegisterToLogin()
             } else {
                 Toast.makeText(this, "Error en el registro", Toast.LENGTH_SHORT).show()
             }
@@ -59,7 +60,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun goToHomePage() {
         val i = Intent(this, HomePageActivity::class.java)
-        i.putExtra("NEW_USER", "newuser")
         startActivity(i)
     }
 

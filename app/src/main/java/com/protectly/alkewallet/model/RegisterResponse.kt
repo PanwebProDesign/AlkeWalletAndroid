@@ -7,9 +7,9 @@ data class RegisterResponse(
     val last_name: String?,
     val email: String?,
     val password: String?,
-    val points : Long?,
-    val updatedAt : String?,
-    val createdAt : String?,
-    val error : String?,
-    val status : Long?
+    val points: Long?,
+    val updatedAt: String?,
+    val createdAt: String?,
+    val error: String?,
+    val status: Long?
 )

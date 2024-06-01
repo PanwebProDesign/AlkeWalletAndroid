@@ -1,4 +1,4 @@
-package com.protectly.alkewallet.network
+package com.protectly.alkewallet.model.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

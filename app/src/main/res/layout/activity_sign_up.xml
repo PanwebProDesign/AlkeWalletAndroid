@@ -26,10 +26,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="409dp"
-        android:layout_height="595dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/btn_register_r"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titlesing_up">
@@ -59,11 +59,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
-                app:boxBackgroundColor="@color/blanco"
-                app:errorEnabled="true"
-                app:hintEnabled="false"
                 android:textColorHint="@color/material_dynamic_neutral80"
-                >
+                app:boxBackgroundColor="@color/blanco"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldFirstName"
@@ -99,7 +97,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
                 app:boxBackgroundColor="@color/blanco"
-                app:errorEnabled="true"
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -136,7 +133,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
                 app:boxBackgroundColor="@color/blanco"
-                app:errorEnabled="true"
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -174,7 +170,6 @@
                 android:layout_marginEnd="30dp"
                 app:boxBackgroundColor="@color/blanco"
                 app:endIconMode="password_toggle"
-                app:errorEnabled="true"
                 app:errorIconDrawable="@null"
                 app:hintEnabled="false">
 
@@ -213,7 +208,6 @@
                 android:layout_marginEnd="30dp"
                 app:boxBackgroundColor="@color/blanco"
                 app:endIconMode="password_toggle"
-                app:errorEnabled="true"
                 app:errorIconDrawable="@null"
                 app:hintEnabled="false">
 
@@ -237,20 +231,21 @@
         android:id="@+id/btn_register_r"
         style="@style/boton_celeste"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
         android:text="@string/addaccount"
         app:layout_constraintBottom_toTopOf="@+id/btn_register_to_login"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/btn_register_to_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/jua"
         android:text="@string/backtologin"
         android:textColor="@color/celesteoscuro"
