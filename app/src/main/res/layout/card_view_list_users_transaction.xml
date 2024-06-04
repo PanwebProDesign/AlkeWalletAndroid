@@ -18,13 +18,13 @@
         app:srcCompat="@drawable/image_list_prof" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/concept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/jua"
-        android:text="Nombre"
+        android:text="Motivo"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/img_profile_list"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,8 +37,8 @@
         android:fontFamily="@font/jua"
         android:textSize="12sp"
         android:textColor="@color/plomooscuro"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintStart_toStartOf="@+id/concept"
+        app:layout_constraintTop_toBottomOf="@+id/concept" />
 
     <TextView
         android:id="@+id/ammount_list"
@@ -53,15 +53,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/last_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/jua"
-        android:text="Apellido"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

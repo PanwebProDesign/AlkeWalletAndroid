@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,10 @@ import com.protectly.alkewallet.R
 import com.protectly.alkewallet.databinding.ActivityHomePageBinding
 import com.protectly.alkewallet.databinding.DialogNoAccountBinding
 import com.protectly.alkewallet.GlobalClassApp
-import com.protectly.alkewallet.model.Transaction
 import com.protectly.alkewallet.view.adapter.ListTransactionAdapter
 import com.protectly.alkewallet.viewmodel.AssignAccountViewModel
 import com.protectly.alkewallet.viewmodel.HomeViewModel
+import com.protectly.alkewallet.viewmodel.TransactionViewModel
 
 class HomePageActivity : AppCompatActivity() {
 
@@ -26,9 +27,7 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var assignAccountViewModel: AssignAccountViewModel
-
-    lateinit var linearLayoutEmpty: LinearLayout
-    lateinit var linearLayoutTransactions: LinearLayout
+    private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +38,11 @@ class HomePageActivity : AppCompatActivity() {
         // Inicializamos HomeViewModel
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         assignAccountViewModel = ViewModelProvider(this).get(AssignAccountViewModel::class.java)
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
 
-        // ID para linear layout
-        linearLayoutEmpty = findViewById(R.id.emptylayout_hp)
-        // linearLayoutTransactions = findViewById(R.id.transactionlayout_hp)
+        // Inicializar layouts
+        val linearLayoutEmpty = binding.emptylayoutHp
+        val linearLayoutTransactions = binding.transactionlayoutHp
 
         // Obtener el nombre del usuario desde GlobalClassApp
         val userName = "Hola, ${GlobalClassApp.userLogged?.first_name} ${GlobalClassApp.userLogged?.last_name}"
@@ -81,26 +81,28 @@ class HomePageActivity : AppCompatActivity() {
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
         }
 
+        transactionViewModel.transactionsLiveData.observe(this) { transactions ->
+            if (transactions.isNotEmpty()) {
+                val adapter = ListTransactionAdapter(transactions)
+                binding.recyclerListUser.adapter = adapter
+                binding.recyclerListUser.layoutManager = LinearLayoutManager(this)
+                linearLayoutEmpty.visibility = View.GONE
+                linearLayoutTransactions.visibility = View.VISIBLE
+            } else {
+                linearLayoutEmpty.visibility = View.VISIBLE
+                linearLayoutTransactions.visibility = View.GONE
+            }
+        }
+
+        transactionViewModel.errorMessageLiveData.observe(this) { errorMessage ->
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        }
+
         // Verificar la cuenta del usuario
         homeViewModel.checkUserAccount()
 
-        // Creamos la lista de usuarios y transacciones
-        val transacciones = arrayOf(
-            Transaction("Pedro", "Picapiedra", "22-05-2024", "$100.00", "https://i.ibb.co/XpXGQRv/user-1.png"),
-            Transaction("John", "Doe", "2024-05-20", "$100.00", "https://i.ibb.co/8Kr66KJ/user-2.png"),
-            Transaction("Jane", "Smith", "2024-05-21", "$200.00", "https://i.ibb.co/k2ZWbh7/user-3.png"),
-            Transaction("Alice", "Johnson", "2024-05-22", "-$150.00", "https://i.ibb.co/QbmNchQ/user-4.png"),
-            Transaction("Bob", "Brown", "2024-05-23", "$250.00", "https://i.ibb.co/1vFsvdF/user-5.png"),
-            Transaction("Charlie", "Davis", "2024-05-24", "$300.00", "https://randomuser.me/api/portraits/men/43.jpg"),
-            Transaction("Pedro", "Picapiedra", "22-05-2024", "$100.00", "https://randomuser.me/api/portraits/men/1.jpg"),
-            Transaction("John", "Doe", "2024-05-20", "-$100.00", "https://randomuser.me/api/portraits/women/3.jpg"),
-            Transaction("Jane", "Smith", "2024-05-21", "$200.00", "https://randomuser.me/api/portraits/women/13.jpg")
-        )
-
-        // Crear el adaptador
-        val adapter = ListTransactionAdapter(transacciones.toList())
-        binding.recyclerListUser.adapter = adapter
-        binding.recyclerListUser.layoutManager = LinearLayoutManager(this)
+        // Obtener transacciones
+        transactionViewModel.fetchTransactions()
     }
 
     private fun showNoAccountDialog() {

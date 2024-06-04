@@ -7,6 +7,8 @@ import com.protectly.alkewallet.model.LoginRequest
 import com.protectly.alkewallet.model.LoginResponse
 import com.protectly.alkewallet.model.RegisterRequest
 import com.protectly.alkewallet.model.RegisterResponse
+import com.protectly.alkewallet.model.Transaction
+import com.protectly.alkewallet.model.TransactionsResponse
 import com.protectly.alkewallet.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -36,5 +38,8 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Body accountRequest: AccountRequest
     ): Response<AccountResponse>
+
+    @GET("transactions")
+    suspend fun getTransactions(@Header("Authorization") authHeader: String): Response<TransactionsResponse>
 
 }

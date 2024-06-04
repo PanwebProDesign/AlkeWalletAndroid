@@ -23,6 +23,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     lateinit var accessTokenVm: String
     lateinit var user: String
 
+    //aqui se guarda el token
     private val sharedPreferences = application.getSharedPreferences("AlkeWallet", Context.MODE_PRIVATE)
 
     fun login(email: String, password: String) {
