@@ -5,6 +5,8 @@ import com.protectly.alkewallet.model.AccountRequest
 import com.protectly.alkewallet.model.AccountResponse
 import com.protectly.alkewallet.model.LoginRequest
 import com.protectly.alkewallet.model.LoginResponse
+import com.protectly.alkewallet.model.PaymentRequest
+import com.protectly.alkewallet.model.PaymentResponse
 import com.protectly.alkewallet.model.RegisterRequest
 import com.protectly.alkewallet.model.RegisterResponse
 import com.protectly.alkewallet.model.Transaction
@@ -16,6 +18,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -41,5 +44,12 @@ interface ApiService {
 
     @GET("transactions")
     suspend fun getTransactions(@Header("Authorization") authHeader: String): Response<TransactionsResponse>
+
+    @POST("accounts/{accountId}")
+    suspend fun sendPayment(
+        @Header("Authorization") authHeader: String,
+        @Path("accountId") accountId: Int,
+        @Body paymentRequest: PaymentRequest
+    ): Response<PaymentResponse>
 
 }

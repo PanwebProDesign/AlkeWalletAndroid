@@ -30,8 +30,8 @@
     <string name="mycard">Mis tarjetas</string>
     <string name="option">Opciones</string>
     <string name="helpcenter">Centro de ayuda</string>
-    <string name="usertest">Reem Khaled</string>
-    <string name="usertestemail">reem_1993@gmail.com</string>
+    <string name="usertest">Usuario de Prueba</string>
+    <string name="usertestemail">email@prueba.com</string>
     <string name="moneyadd">Cantidad a ingresar</string>
     <string name="_20_00">20.00</string>
     <string name="notas_de_transferencia">Notas de transferencia</string>

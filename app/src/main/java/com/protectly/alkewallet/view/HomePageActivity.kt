@@ -45,7 +45,7 @@ class HomePageActivity : AppCompatActivity() {
         val linearLayoutTransactions = binding.transactionlayoutHp
 
         // Obtener el nombre del usuario desde GlobalClassApp
-        val userName = "Hola, ${GlobalClassApp.userLogged?.first_name} ${GlobalClassApp.userLogged?.last_name}"
+        val userName = "Hola, ${GlobalClassApp.userLogged?.first_name}"
         binding.userNameHome.text = userName
 
         binding.send1.setOnClickListener { goToSendMoney() }
@@ -72,6 +72,11 @@ class HomePageActivity : AppCompatActivity() {
         assignAccountViewModel.accountCreatedLiveData.observe(this) { accountCreated ->
             if (accountCreated) {
                 Toast.makeText(this, "Cuenta asignada exitosamente", Toast.LENGTH_SHORT).show()
+                //aqui volveremos a cargar el homePageActivity
+                val intent = Intent(this, HomePageActivity::class.java)
+                startActivity(intent)
+                finish()
+
             } else {
                 Toast.makeText(this, "Error al asignar cuenta", Toast.LENGTH_SHORT).show()
             }

@@ -5,19 +5,20 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.protectly.alkewallet.GlobalClassApp
+import com.protectly.alkewallet.model.PaymentRequest
+import com.protectly.alkewallet.model.PaymentResponse
 import com.protectly.alkewallet.model.network.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class RequestMoneyViewModel(application: Application) : AndroidViewModel(application) {
 
-    val accountCheckLiveData = MutableLiveData<Boolean>()
+    val topupResultLiveData = MutableLiveData<PaymentResponse?>()
     val errorMessageLiveData = MutableLiveData<String>()
-    val userBalanceLiveData = MutableLiveData<Double?>()
 
-    fun checkUserAccount() {
+    fun requestMoney(accountId: Int, concept: String, amount: Double) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val token = GlobalClassApp.tokenAccess
@@ -26,24 +27,21 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     return@launch
                 }
 
-                val response = ApiClient.apiService.getAccount("Bearer $token")
+                val paymentRequest = PaymentRequest(type = "topup", concept = concept, amount = amount)
+                val response = ApiClient.apiService.sendPayment("Bearer $token", accountId, paymentRequest)
                 if (response.isSuccessful) {
-                    val accountData = response.body()
-                    if (accountData != null && accountData.isNotEmpty()) {
-                        GlobalClassApp.userAccount = accountData[0] // Guardar la cuenta del usuario en GlobalClassApp
-                        accountCheckLiveData.postValue(true)
-                        userBalanceLiveData.postValue(accountData[0].money) // Asume que la primera cuenta es la correcta
-                    } else {
-                        accountCheckLiveData.postValue(false)
-                    }
+                    val paymentResponse = response.body()
+                    topupResultLiveData.postValue(paymentResponse)
                 } else {
-                    accountCheckLiveData.postValue(false)
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("RequestMoneyViewModel", "Error al realizar el depósito: $errorBody")
+                    errorMessageLiveData.postValue("Error al realizar el depósito: $errorBody")
                 }
             } catch (e: IOException) {
-                Log.e("HomeViewModel", "Error de red: ${e.message}")
+                Log.e("RequestMoneyViewModel", "Error de red: ${e.message}")
                 errorMessageLiveData.postValue("Error de red: ${e.message}")
             } catch (e: Exception) {
-                Log.e("HomeViewModel", "Error desconocido: ${e.message}")
+                Log.e("RequestMoneyViewModel", "Error desconocido: ${e.message}")
                 errorMessageLiveData.postValue("Error desconocido: ${e.message}")
             }
         }
